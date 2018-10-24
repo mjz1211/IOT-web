@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script language="javascript">
+        var elText;
+        items = ['綠巨人', '鋼鐵人'];
+        function init()
+        {
+            elText = document.getElementById('txtContent');
+            elPanel = document.getElementById('panel');
+            //window.alert(elText);
+            for (var item in items)
+            {
+                var curName = items[item];
+                var elLabel = document.createElement('label');
+                //
+                elLabel.innerText = curName;
+                //
+                elPanel.appendChild(elLabel);
+            }
+
+        }
+
+        function clickHandler()
+        {
+            //alert(items.length);
+            //alert(items[0]);
+            var today = new Date();
+            alert(today);
+        }
+
+        function showItems() {
+            //alert(items.length);
+            //alert(items[0]);
+            for (var item in items) {
+                alert(items[item]);
+            }
+
+        }
+
+        function arrayAdd()
+        {
+            var name = elText.value;
+            items.push(name);
+            var elLabel = document.createElement('label');
+            //
+            elLabel.innerText = name;
+            //
+            elPanel.appendChild(elLabel);
+        }
+    </script>
+</head>
+<body onload="init()">
+    <label>content</label>
+    <input type="text" id="txtContent" />
+    <input type="button" value="alert" onclick="clickHandler()" />
+    <input type="button" value="showItem" onclick="showItems()" />
+    <input type="button" value="dynamic insert array" onclick="arrayAdd()" />
+    <div id="panel" style=" width:200px;height:200px;background-color:lightcoral"></div>
+</body>
+</html>

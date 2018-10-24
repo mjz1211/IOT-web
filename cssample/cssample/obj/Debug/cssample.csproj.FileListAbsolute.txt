@@ -1,0 +1,7 @@
+C:\Users\l504\source\repos\cssample\cssample\bin\Debug\cssample.exe.config
+C:\Users\l504\source\repos\cssample\cssample\bin\Debug\cssample.exe
+C:\Users\l504\source\repos\cssample\cssample\bin\Debug\cssample.pdb
+C:\Users\l504\source\repos\cssample\cssample\obj\Debug\cssample.csprojAssemblyReference.cache
+C:\Users\l504\source\repos\cssample\cssample\obj\Debug\cssample.csproj.CoreCompileInputs.cache
+C:\Users\l504\source\repos\cssample\cssample\obj\Debug\cssample.exe
+C:\Users\l504\source\repos\cssample\cssample\obj\Debug\cssample.pdb

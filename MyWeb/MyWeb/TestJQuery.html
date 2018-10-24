@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="Scripts/jquery-3.3.1.min.js"></script>
+    <script>
+        $(document).ready(
+            function () {
+                alert('hi jquery...');
+                var elButton = $('#btnGo');
+                elButton.click(function () {
+                    //content = $('#txtResult').val();
+                    $('#txtResult').val('hello');
+                });
+            }
+        );
+
+    </script>
+
+</head>
+<body>
+    <label>content</label>
+    <input type="button" value="go" id="btnGo" />
+    <input type="text" id="txtResult" />
+</body>
+</html>
