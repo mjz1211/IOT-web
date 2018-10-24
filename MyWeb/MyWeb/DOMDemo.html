@@ -2,62 +2,74 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title></title>
-    <script language="javascript">
-        var elText;
-        items = ['綠巨人', '鋼鐵人'];
-        function init()
-        {
+    <title>DOM-Document Object Model</title>
+    <script>
+        //陣列定義 初始化
+        items = ['張三豐', '張無忌'];
+        function init() {
+            //選擇這些DOM物件(如何挑選-參考) global variable
             elText = document.getElementById('txtContent');
             elPanel = document.getElementById('panel');
-            //window.alert(elText);
-            for (var item in items)
+            //現有陣列元素動態加入面板中Tag
+            for (var item in  items)
             {
                 var curName = items[item];
                 var elLabel = document.createElement('label');
-                //
+                //往這一個<label>內容<label>
                 elLabel.innerText = curName;
-                //
+                //讓Panel動態加入這一個元素物件
                 elPanel.appendChild(elLabel);
+
             }
 
+            //window.alert(elText);
+
+
+        }
+        //事件程序function 給按鈕click來用
+        function clickHandler() {
+            //區域變數
+            var today = new Date(); //建構子--Date class
+            //擷取文字方塊輸入內容
+            alert(elText.value+'...'+today);
         }
 
-        function clickHandler()
-        {
-            //alert(items.length);
-            //alert(items[0]);
-            var today = new Date();
-            alert(today);
-        }
-
+        //按鈕事件程序
         function showItems() {
-            //alert(items.length);
-            //alert(items[0]);
+            //alert(items.length); //操作陣列元素數量length屬性
+            //alert(items[0]); //陣列元素從零開始對應第一個
+            //走訪?? for loop
             for (var item in items) {
                 alert(items[item]);
             }
-
         }
 
-        function arrayAdd()
-        {
+        //事件程序-測試陣列是否可以動態參考
+        function arrayAdd() {
+            //文字輸入方塊global變數(init初始化)
             var name = elText.value;
+            //alert(name);
+            //透過陣列動態加入項目??
             items.push(name);
             var elLabel = document.createElement('label');
-            //
+            //往這一個<label>內容<label>
             elLabel.innerText = name;
-            //
+            //讓Panel動態加入這一個元素物件
             elPanel.appendChild(elLabel);
+           
+
+
         }
     </script>
 </head>
 <body onload="init()">
-    <label>content</label>
-    <input type="text" id="txtContent" />
-    <input type="button" value="alert" onclick="clickHandler()" />
-    <input type="button" value="showItem" onclick="showItems()" />
-    <input type="button" value="dynamic insert array" onclick="arrayAdd()" />
-    <div id="panel" style=" width:200px;height:200px;background-color:lightcoral"></div>
+    <label>內容</label>
+    <!--tag attribute value as Property-->
+    <input type="text" id="txtContent" value="請入姓名..." />
+    <input type="button" value="我是按鈕" onclick="clickHandler()" />
+    <input type="button" value="陣列內容" onclick="showItems()" />
+    <input type="button" value="動態加入陣列元素" onclick="arrayAdd()" />
+
+    <div id="panel" style="width:200px;height:200px;background-color:lightcoral"></div>
 </body>
 </html>

@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>整合CHT IoT獲取停車資訊</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        urlString = "https://iot.cht.com.tw/iot/v1/device/5604707091/sensor/park01/rawdata";
+        //選擇文件進行初始化
+        $(document).ready(
+            function () {
+                //初始化
+                $('#panel').hide();
+                //alert('hi jquery');
+                $('#btnGo').bind('click',
+                    function () {
+                        //alert('click me');
+                        //進行非同步處理AJAX  (url/http method/send data?/response data 處理(callback)/error callback...)
+                        //傳遞的是一個物件(屬性.....)
+                        $.ajax(
+                            //傳遞一個JavaScript物件
+                            {
+                                url: urlString,
+                                //HTTP Method
+                                type: 'GET',
+                                //透過XMLHttpRequest加入一個Header (帶上去apikey)
+                                beforeSend: function (xhr) {
+                                    //xhr XMLHttpRequest物件
+                                    xhr.setRequestHeader('CK', 'PK8W6B94WBA23NSFQQ');
+                                    //...加兩個以上
+
+                                },
+                                //status 200 callback
+                                success: function (result, status, xhr) {
+                                    //alert(result.name);
+                                    //鋪資料
+                                    //alert(result.time);
+                                    curDate = new Date(result.time);
+                                    localeString=curDate.toLocaleString('zh-TW');
+                                    $('#sensorid').text(result.id);
+                                    $('#deviceid').text(result.deviceId);
+                                    $('#value').text(result.value);
+                                    $('#time').text(localeString);
+                                    $('#panel').show();
+                                },
+                                //error callback
+                                error: function (xhr, status, error) {
+                                    alert('發生錯誤:'+ typeof xhr);
+                                }
+                            }
+                        );
+
+                    }
+                );
+            }
+        );
+    </script>
+</head>
+<body>
+    <input type="button" value="獲取停車位置狀態" id="btnGo"/>
+    <div id="panel" style="width:400px;height:100px;background-color:lavender">
+        <ul>
+            <li><label>停車位置編號:</label><label id="sensorid"></label></li>
+            <li><label>裝置編號:</label><label id="deviceid"></label></li>
+            <li><label>狀態:</label><label id="value"></label></li>
+            <li><label>發生日期時間:</label><label id="time"></label></li>
+        </ul>
+    </div>
+</body>
+</html>

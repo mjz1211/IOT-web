@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>非同步處理</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        //urlString = "https://iot.cht.com.tw/iot/v1/device/5604707091/sensor/park01/rawdata";
+        urlString = "http://localhost:51314/emp.json";
+        //選擇文件進行初始化
+        $(document).ready(
+            function () {
+                //初始化
+                $('#panel').hide();
+                //alert('hi jquery');
+                $('#btnGo').bind('click',
+                    function () {
+                        //alert('click me');
+                        //進行非同步處理AJAX  (url/http method/send data?/response data 處理(callback)/error callback...)
+                        //傳遞的是一個物件(屬性.....)
+                        $.ajax(
+                            //傳遞一個JavaScript物件
+                            {
+                                url: urlString,
+                                //HTTP Method
+                                type: 'GET',
+                                //status 200 callback
+                                success: function (result, status, xhr) {
+                                    //alert(result.name);
+                                    //鋪資料
+                                    $('#empid').text(result.id);
+                                    $('#name').text(result.name);
+                                    $('#address').text(result.address);
+                                    $('#phone').text(result.phone); //text() javascript innerText=
+                                    $('#panel').show();
+                                },
+                                //error callback
+                                error: function (xhr, status, error) {
+                                    alert(error);
+                                }
+                            }
+                        );
+
+                    }
+                );
+            }
+        );
+    </script>
+</head>
+<body>
+    <input type="button" value="去要一個員工JSON回來" id="btnGo"/>
+    <div id="panel" style="width:200px;height:100px;background-color:lavender">
+        <ul>
+            <li><label>編號:</label><label id="empid"></label></li>
+            <li><label>姓名:</label><label id="name"></label></li>
+            <li><label>電話:</label><label id="phone"></label></li>
+            <li><label>地址:</label><label id="address"></label></li>
+        </ul>
+    </div>
+</body>
+</html>

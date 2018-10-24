@@ -71,6 +71,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AjaxDemo.html" />
+    <Content Include="chtparking.html" />
+    <Content Include="mjzAjaxDemo.html" />
+    <Content Include="mjzCHTParking.html" />
     <Content Include="Default.aspx" />
     <Content Include="DOMDemo.html" />
     <Content Include="GetParkData.aspx" />

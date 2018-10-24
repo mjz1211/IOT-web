@@ -7,13 +7,13 @@
         function createEmployee() {
             var emp = {
                 //定義屬性
-                id: 1,
-                name: '張三豐',
-                address: '新北市板橋區',
+                id:1,
+                name:'張三豐',
+                address:'新北市板橋區',
                 phone: '02-34343434',
                 //method(程序)
                 information: function (msg) {
-                    alert(msg + ' hellworld  ' + this.name);
+                    alert(msg+' hellworld  '+this.name);
                 }
             };
             //alert(emp.name);
@@ -46,21 +46,10 @@
             ];
         }
     </script>
-    <style>
-        #btnEmp {
-            background-color:black;
-            color:white;
-        }
-        input[type=text] {
-            background-color:yellow;
-            color:red;
-        }
-    </style>
 </head>
 <body>
-    <input type="text" />
-    <input type="button" value="呈現員工物件" onclick="createEmployee()" id="btnEmp" />
-    <br />
-    <input type="button" value="呈現客戶JSON" onclick="showJson()" id="btnJson"/>
+    <input type="button" value="呈現員工物件" onclick="createEmployee()"/>
+    <br/>
+    <input type="button" value="呈現客戶JSON" onclick="showJson()" />
 </body>
 </html>

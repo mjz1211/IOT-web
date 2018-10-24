@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        //
+        urlString = "http://localhost:52470/emp.json";
+        $(document).ready(
+            
+            function () {
+                //alert('hi');
+                $('#panel').hide(),
+                $('#btnGo').bind('click',
+                    function () {
+                        $.ajax({
+                            url: urlString,
+                            type: 'GET',
+                            success: function (result, status, xhr) {
+                                //alert(result.name);
+                                $('#empid').text(result.id);
+                                $('#name').text(result.name);
+                                $('#address').text(result.address);
+                                $('#phone').text(result.phone);
+                            },
+                            error: function (result, error, xhr) {
+                                alert(error);
+                            }
+                        });
+                        $('#panel').show()
+                    }
+                );
+            }
+        );
+    </script>
+</head>
+<body>
+    <input type="button" value="get employee json" id="btnGo" />
+    <div id="panel" style="width:200px;height:200px;background-color:lightblue">
+        <ul>
+            <li><label>ID:</label><label id="empid"></label></li>
+            <li><label>NAME: </label><label id="name"></label></li>
+            <li><label>ADDRESS: </label><label id="address"></label></li>
+            <li><label>PHONE: </label><label id="phone"></label></li>
+        </ul>
+    </div>
+</body>
+</html>
