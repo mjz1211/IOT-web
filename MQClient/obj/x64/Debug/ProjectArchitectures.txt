@@ -1,0 +1,1 @@
+c:\raspberrywin\MQClient\MQClient.csproj;x64

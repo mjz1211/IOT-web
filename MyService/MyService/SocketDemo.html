@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>訂閱停車場及時狀態</title>
+    <script src="Scripts/jquery-3.3.1.min.js"></script>
+    <script>
+        wss = 'wss://iot.cht.com.tw:443/iot/ws/rawdata'; //topic
+        //選擇document ready 初始化
+        $(document).ready(
+            //init初始化程序
+            function () {
+                //隱藏Table
+                $('#tb').hide();
+                //選取按鈕id 委派click事件
+                $('#btnGo').click(
+                    //事件程序
+                    function () {
+                        //呈現表格
+                        $('#tb').show();
+                        //1.需要一個WebSocket Client
+                        var socket = new WebSocket(wss); //同時進行WebSocket Connect(Open...)
+                       //委派一個listener 聆聽 已經Opened 引發事件程序 
+                        socket.onopen = function (e) {
+                            
+                            //alert('WS連接成功!!');
+                            var message = '{ "ck": "PK8W6B94WBA23NSFQQ", "resources": ["/v1/device/5604707091/sensor/park01/rawdata"]}';
+                            //2.送出請求訊息(api key/resource)
+                            socket.send(message);
+                        }
+                        //response callback委派
+                         //3.形成一個callback response推播資訊下來
+                        socket.onmessage = function (e) {
+                            //alert(typeof e.data);
+                            //將字串轉換成JSON 物件
+                            var jsonObject = JSON.parse(e.data);
+                            //alert(jsonObject.time);
+                            //UI
+                            $('#deviceid').text(jsonObject.deviceId);
+                            $('#sensorid').text(jsonObject.id);
+                            $('#time').text(jsonObject.time);
+                            $('#value').text(jsonObject.value);
+                        };
+                       
+                    }
+                );
+            }
+        );
+    </script>
+</head>
+<body>
+    <input type="button" value="對WebSocket Server進行訂閱..." id="btnGo"/>
+    <table id="tb" style="border:double;background-color:yellowgreen">
+        <tr>
+            <td>裝置編號</td>
+            <td id="deviceid"></td>
+        </tr>
+        <tr>
+            <td>傳感設備編號</td>
+            <td id="sensorid"></td>
+        </tr>
+        <tr>
+            <td>時間點</td>
+            <td id="time"></td>
+        </tr>
+        <tr>
+            <td>停車狀態</td>
+            <td id="value"></td>
+        </tr>
+    </table>
+</body>
+</html>

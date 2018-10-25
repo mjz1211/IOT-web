@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>訂閱停車場即時狀態</title>
+    <script src="Scripts/jquery-3.3.1.min.js"></script>
+    <script>
+        //
+        wss = 'wss://iot.cht.com.tw:443/iot/ws/rawdata';
+        $(document).ready(
+            //init
+            function () {
+                $('#tb').hide();
+                $('#btnGo').click(
+                    function () {
+                        $('#tb').show();
+                        //it needs a websocket client
+                        var socket = new WebSocket(wss); //it makes websocket connection at the same time.
+                        //make a delegate listener
+                        socket.onopen = function (e) {
+                            //alert('open');
+                            var message = '{"ck":"DKGM95TKZK3FYUKKEU","resources": ["/v1/device/10706638596/sensor/park01/rawdata"]}';
+                            //send request message
+                            socket.send(message);
+                        }
+                        //response callback delegate
+                        socket.onmessage = function (e) {
+                            //alert(e.data);
+                            //convert string(e.data) to JSON
+                            var jsonObject = JSON.parse(e.data);
+                            //alert(jsonObject.time);
+                            $('#deviceid').text(jsonObject.deviceId);
+                            $('#sensorid').text(jsonObject.id);
+                            $('#time').text(jsonObject.time);
+                            $('#value').text(jsonObject.value);
+                        }
+                    }
+                );
+            }
+        );
+    </script>
+</head>
+<body>
+    <input type="button" value="對web socket 進行訂閱" id="btnGo" />
+    <table id="tb" style="background-color:aqua">
+        <tr><td>device id</td><td id="deviceid"></td></tr>
+        <tr><td>sensor id</td><td id="sensorid"></td></tr>
+        <tr><td>time</td><td id="time"></td></tr>
+        <tr><td>value</td><td id="value"></td></tr>
+    </table>
+</body>
+</html>
